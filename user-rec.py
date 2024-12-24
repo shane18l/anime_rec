@@ -8,7 +8,6 @@ df = pd.read_csv(path)
 titles_path = "files/anime-filtered.csv"
 titles_df = pd.read_csv(titles_path)
 titles_dict = titles_df.set_index('anime_id')['Name'].to_dict()
-print(titles_dict)
 
 # Create matrix (users are rows, anime are columns)
 user_matrix = df.pivot(index='user_id', columns='anime_id', values='rating').fillna(0)
@@ -17,7 +16,6 @@ user_matrix = df.pivot(index='user_id', columns='anime_id', values='rating').fil
 user_similarity = cosine_similarity(user_matrix)
 
 user_similarity_df = pd.DataFrame(user_similarity, index=user_matrix.index, columns= user_matrix.index)
-print(user_similarity_df)
 
 def get_anime_name(anime_id):
     return titles_dict[anime_id]
